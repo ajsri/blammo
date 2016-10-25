@@ -39,8 +39,23 @@ app.post('/safe/add', function(req, res) {
             calId = req.body.calId,
             qty = req.body.quantity;
         var query = 'insert into ammo values("",' + mfgId + ',' + price + ',' + calId + ',' + qty + ')';
-        res.send(query);
+        var c = db();
+        c.connect();
+        c.query(query, function(err, rows, fields) {
+            if(err) throw err;
+            res.send(200)
+        });
+        c.end();
     }
+});
+
+app.get('/safe/ammo', function(req, res) {
+    var c = db();
+    c.connect();
+    c.query(config.queries.safe.ammoCountByCaliber, function(err, rows, fields) {
+        res.send(rows);
+    })
+    c.end();
 });
 
 app.listen(config.env[env].port, function() {
