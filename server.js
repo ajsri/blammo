@@ -1,18 +1,23 @@
-var app = require('express')();
+var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-var config = require('./config.dev.js');
+var webpack = require('webpack');
 
-var env = 'dev';
 
-var config = require("./webpack.config.js");
-var compiler = webpack(config);
+var config = require('./app/config.dev.js');
+var wconfig = require("./webpack.config.js");
 
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackHotMiddleware = require("webpack-hot-middleware");
 
+var app = express();
+
+var compiler = webpack(wconfig);
+
+app.use(bodyParser.json());
+
 app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: wconfig.output.publicPath,
     state: { colors: true }
 }));
 
@@ -21,6 +26,9 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 app.use(express.static("public"));
+
+var env = 'dev';
+
 
 function db() {
     return mysql.createConnection({
@@ -31,7 +39,7 @@ function db() {
     });
 }
 
-app.use(bodyParser.json());
+
 
 app.get('/safe/contents', function(req, res) {
     var c = db();
@@ -104,7 +112,7 @@ app.get('/safe/brass/:id*?', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 app.listen(config.env[env].port, function() {

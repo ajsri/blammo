@@ -1,10 +1,10 @@
-var webpack = require("webpack");
+var webpack = require('webpack');
 
 module.exports = {
-    entry: [__dirname + "/app/app.js", "webpack-hot-middleware/client"],
+    entry: [__dirname + '/app/app.js', 'webpack-hot-middleware/client'],
     output: {
-        path: __dirname,
-        filename: "bundle.js"
+        path: __dirname + "/public",
+        filename: 'bundle.js'
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -14,14 +14,14 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /.js$/,
-                loader: "babel-loader",
                 exclude: /node_modules/,
+                loader: 'babel',
+                test: /\.jsx?$/,
                 query: {
-                    presets: ["es2015", "react", "react-hmre"]
+                    presets: ['react', 'es2015']
                 }
             }
         ]
-    }
+    },
+    target: 'web'
 }
-
