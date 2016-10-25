@@ -1,5 +1,6 @@
 var app = require('express')();
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
 var config = require('./config.dev.js');
 
 var env = 'dev';
@@ -9,25 +10,37 @@ function db() {
         host: config.env[env].mysql.host,
         user: config.env[env].mysql.user,
         password: config.env[env].mysql.password,
-        database: 'codstats'
+        database: '47_ammo'
     });
 }
-app.get('/record/:uid*?', function(req, res) {
-    var query = '';
-    if(req.params.uid){
-        query = 'SELECT * FROM `record` WHERE GamerTag = "' + req.params.uid + '"';
-    }
-    else {
-        query = 'SELECT * FROM `record`'
-    }
+
+app.use(bodyParser.json());
+
+app.get('/safe/contents', function(req, res) {
     var c = db();
     c.connect();
-    c.query(query, function(err, rows, fields){
+    c.query(config.queries.safe.contents, function(err, rows, fields) {
         if(err) throw err;
-        res.send(rows);
+        res.send(rows)
     });
     c.end();
+});
 
+app.post('/safe/add', function(req, res) {
+    if(!req.body.mfgId || !req.body.quantity || !req.body.calId || !req.body.price) {
+        res.json({
+            error: 'Invalid query params: check your request body',
+            request: req.body
+        });
+    }
+    else {
+        var mfgId = req.body.mfgId,
+            price = req.body.price,
+            calId = req.body.calId,
+            qty = req.body.quantity;
+        var query = 'insert into ammo values("",' + mfgId + ',' + price + ',' + calId + ',' + qty + ')';
+        res.send(query);
+    }
 });
 
 app.listen(config.env[env].port, function() {
