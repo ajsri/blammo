@@ -49,7 +49,7 @@ app.post('/safe/ammo/add', function(req, res) {
     }
 });
 
-app.get('/safe/ammo', function(req, res) {
+app.get('/safe/ammo/count', function(req, res) {
     var c = db();
     c.connect();
     c.query(config.queries.safe.ammoCountByCaliber, function(err, rows, fields) {
@@ -65,12 +65,22 @@ app.get('/safe/guns', function(req, res) {
         res.send(rows);
     });
     c.end();
-})
+});
 
 app.get('/safe/guns/:id*?', function(req, res) {
     var c = db();
     c.connect();
     c.query(config.queries.safe.gunInfo + req.params.id, function(err, rows, fields) {
+        res.send(rows);
+    })
+    c.end();
+});
+
+app.get('/safe/brass/:id*?', function(req, res) {
+    var c = db();
+    c.connect();
+    var query = !req.params.id ? config.queries.safe.brassCount : config.queries.safe.brassCount + ' WHERE caliber.shortName = "' + req.params.id + '"';
+    c.query(query, function(err, rows, fields) {
         res.send(rows);
     })
     c.end();
