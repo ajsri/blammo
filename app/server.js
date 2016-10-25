@@ -67,6 +67,15 @@ app.get('/safe/guns', function(req, res) {
     c.end();
 })
 
+app.get('/safe/guns/:id*?', function(req, res) {
+    var c = db();
+    c.connect();
+    c.query(config.queries.safe.gunInfo + req.params.id, function(err, rows, fields) {
+        res.send(rows);
+    })
+    c.end();
+})
+
 app.listen(config.env[env].port, function() {
     console.log('Now listening on port ' + config.env[env].port);
 });
