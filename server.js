@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var webpack = require('webpack');
 
 
-var config = require('./app/config.dev.js');
+var config = require('./config.dev.js');
 var wconfig = require("./webpack.config.js");
 
 var webpackDevMiddleware = require("webpack-dev-middleware");

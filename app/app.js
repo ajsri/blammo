@@ -10,18 +10,15 @@ import createLogger from "redux-logger"
 
 import { Router, Route, hashHistory, Link, IndexRoute } from "react-router"
 
-//
-// const logger = createLogger();
-// const store = createStore(mainReducer, applyMiddleware(thunk, promise, logger));
+import mainReducer from './reducers/index'
 
-class MainApp extends Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return(
-          <h1>div testingingesafe</h1>
-        )
-    }
-}
-ReactDOM.render(<MainApp/>, document.getElementById("blammo"));
+import MainApp from './components/Main'
+
+const logger = createLogger();
+const store = createStore(mainReducer, applyMiddleware(thunk, promise, logger));
+
+ReactDOM.render(<Provider store={store}>
+    <Router history={hashHistory}>
+        <Route path="/" component={MainApp}></Route>
+    </Router>
+</Provider>, document.getElementById("blammo"));
