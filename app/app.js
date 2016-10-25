@@ -14,6 +14,8 @@ import mainReducer from './reducers/index'
 
 import MainApp from './components/Main'
 
+import "./styles/blammo.scss"
+
 const logger = createLogger();
 const store = createStore(mainReducer, applyMiddleware(thunk, promise, logger));
 
