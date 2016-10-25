@@ -5,6 +5,23 @@ var config = require('./config.dev.js');
 
 var env = 'dev';
 
+var config = require("./webpack.config.js");
+var compiler = webpack(config);
+
+var webpackDevMiddleware = require("webpack-dev-middleware");
+var webpackHotMiddleware = require("webpack-hot-middleware");
+
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    state: { colors: true }
+}));
+
+app.use(webpackHotMiddleware(compiler, {
+    log: console.log
+}));
+
+app.use(express.static("public"));
+
 function db() {
     return mysql.createConnection({
         host: config.env[env].mysql.host,
@@ -72,7 +89,7 @@ app.get('/safe/guns/:id*?', function(req, res) {
     c.connect();
     c.query(config.queries.safe.gunInfo + req.params.id, function(err, rows, fields) {
         res.send(rows);
-    })
+    });
     c.end();
 });
 
@@ -82,9 +99,13 @@ app.get('/safe/brass/:id*?', function(req, res) {
     var query = !req.params.id ? config.queries.safe.brassCount : config.queries.safe.brassCount + ' WHERE caliber.shortName = "' + req.params.id + '"';
     c.query(query, function(err, rows, fields) {
         res.send(rows);
-    })
+    });
     c.end();
-})
+});
+
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
 
 app.listen(config.env[env].port, function() {
     console.log('Now listening on port ' + config.env[env].port);
