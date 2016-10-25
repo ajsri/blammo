@@ -62,7 +62,6 @@ app.get('/safe/guns', function(req, res) {
     var c = db();
     c.connect();
     c.query(config.queries.safe.gunsList, function(err, rows, fields) {
-        console.log(rows);
         res.send(rows);
     });
     c.end();
