@@ -26,7 +26,7 @@ app.get('/safe/contents', function(req, res) {
     c.end();
 });
 
-app.post('/safe/add', function(req, res) {
+app.post('/safe/ammo/add', function(req, res) {
     if(!req.body.mfgId || !req.body.quantity || !req.body.calId || !req.body.price) {
         res.json({
             error: 'Invalid query params: check your request body',
@@ -57,6 +57,16 @@ app.get('/safe/ammo', function(req, res) {
     })
     c.end();
 });
+
+app.get('/safe/guns', function(req, res) {
+    var c = db();
+    c.connect();
+    c.query(config.queries.safe.gunsList, function(err, rows, fields) {
+        console.log(rows);
+        res.send(rows);
+    });
+    c.end();
+})
 
 app.listen(config.env[env].port, function() {
     console.log('Now listening on port ' + config.env[env].port);
