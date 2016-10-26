@@ -5,7 +5,8 @@ var webpack = require('webpack');
 
 
 var config = require('./config.dev.js');
-var wconfig = require("./webpack.config.js");
+var wconfig = require('./webpack.config.js');
+var queries = require('./queries.js');
 
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackHotMiddleware = require("webpack-hot-middleware");
@@ -44,7 +45,7 @@ function db() {
 app.get('/safe/ammo', function(req, res) {
     var c = db();
     c.connect();
-    c.query(config.queries.safe.ammo, function(err, rows, fields) {
+    c.query(queries.safe.ammo, function(err, rows, fields) {
         if(err) throw err;
         res.send(rows)
     });
@@ -77,7 +78,7 @@ app.post('/safe/ammo/add', function(req, res) {
 app.get('/safe/ammo/count', function(req, res) {
     var c = db();
     c.connect();
-    c.query(config.queries.safe.ammoCountByCaliber, function(err, rows, fields) {
+    c.query(queries.safe.ammoCountByCaliber, function(err, rows, fields) {
         res.send(rows);
     })
     c.end();
@@ -86,7 +87,7 @@ app.get('/safe/ammo/count', function(req, res) {
 app.get('/safe/guns', function(req, res) {
     var c = db();
     c.connect();
-    c.query(config.queries.safe.gunsList, function(err, rows, fields) {
+    c.query(queries.safe.gunsList, function(err, rows, fields) {
         res.send(rows);
     });
     c.end();
@@ -95,7 +96,7 @@ app.get('/safe/guns', function(req, res) {
 app.get('/safe/guns/:id*?', function(req, res) {
     var c = db();
     c.connect();
-    c.query(config.queries.safe.gunInfo + req.params.id, function(err, rows, fields) {
+    c.query(queries.safe.gunInfo + req.params.id, function(err, rows, fields) {
         res.send(rows);
     });
     c.end();
@@ -104,7 +105,7 @@ app.get('/safe/guns/:id*?', function(req, res) {
 app.get('/safe/brass/:id*?', function(req, res) {
     var c = db();
     c.connect();
-    var query = !req.params.id ? config.queries.safe.brassCount : config.queries.safe.brassCount + ' WHERE caliber.shortName = "' + req.params.id + '"';
+    var query = !req.params.id ? queries.safe.brassCount : queries.safe.brassCount + ' WHERE caliber.shortName = "' + req.params.id + '"';
     c.query(query, function(err, rows, fields) {
         res.send(rows);
     });
