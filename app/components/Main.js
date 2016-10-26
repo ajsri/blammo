@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Navigation from './Navigation'
+import AddItem from './AddItem'
+
 import axios from 'axios'
 
 class MainApp extends Component {
@@ -11,15 +13,6 @@ class MainApp extends Component {
 	}
 
 	componentDidMount() {
-		console.log("8888");
-		axios.get('/safe/contents')
-			.then(response => {
-				console.log(response)
-				this.setState({items: response.data})
-			})
-			.catch(error => {
-				console.log(error)
-			})
 	}
 
 	render() {
@@ -27,14 +20,8 @@ class MainApp extends Component {
 			<div className="container-fluid fullHeight">
 				<div className="row">
 					<Navigation />
-					<div className="col-md-10">
-						<ul>
-							{this.state.items.map((item, i) => {
-								return(
-									<li>{item.name} {item.shortName} ${item.price} {item.quantity}</li>
-								)
-							})}
-						</ul>
+					<div className="col-md-10 offset-md-2">
+						<h1>Overview</h1>
 					</div>
 				</div>
 			</div>

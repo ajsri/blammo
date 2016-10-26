@@ -1,4 +1,4 @@
 .idea
 node_modules
-app/config.dev.js
+config.dev.js
 bundle.js

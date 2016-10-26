@@ -41,10 +41,10 @@ function db() {
 
 
 
-app.get('/safe/contents', function(req, res) {
+app.get('/safe/ammo', function(req, res) {
     var c = db();
     c.connect();
-    c.query(config.queries.safe.contents, function(err, rows, fields) {
+    c.query(config.queries.safe.ammo, function(err, rows, fields) {
         if(err) throw err;
         res.send(rows)
     });

@@ -1,0 +1,33 @@
+$light-blue: #92c2ce;
+$dark-grey: #262626;
+$white: #fff;
+
+$navigation-primary: $dark-grey;
+$navigation-color: $white;
+
+.left-navigation {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background: $navigation-primary;
+  padding: 0;
+  margin: 0;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    li {
+      color: $navigation-color;
+      cursor: pointer;
+      padding: 1em;
+      &:hover {
+        background: lighten($navigation-primary, 20%);
+      }
+    }
+  }
+}
+
+.container {
+
+}
