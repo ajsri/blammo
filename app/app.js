@@ -22,7 +22,7 @@ const store = createStore(mainReducer, applyMiddleware(thunk, promise, logger));
 ReactDOM.render(<Provider store={store}>
     <Router history={hashHistory}>
         <Route path="/" component={MainApp}>
-            <IndexRoute
+            <IndexRoute></IndexRoute>
         </Route>
     </Router>
 </Provider>, document.getElementById("blammo"));
