@@ -13,6 +13,7 @@ import { Router, Route, hashHistory, Link, IndexRoute } from "react-router"
 import mainReducer from './reducers/index'
 
 import MainApp from './components/Main'
+import Overview from './containers/Overview'
 
 import "./styles/blammo.scss"
 
@@ -22,7 +23,7 @@ const store = createStore(mainReducer, applyMiddleware(thunk, promise, logger));
 ReactDOM.render(<Provider store={store}>
     <Router history={hashHistory}>
         <Route path="/" component={MainApp}>
-            <IndexRoute></IndexRoute>
+            <IndexRoute component={Overview}/>
         </Route>
     </Router>
 </Provider>, document.getElementById("blammo"));

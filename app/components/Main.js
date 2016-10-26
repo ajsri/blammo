@@ -13,6 +13,7 @@ class MainApp extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props.children);
 	}
 
 	render() {
@@ -21,7 +22,7 @@ class MainApp extends Component {
 				<div className="row">
 					<Navigation />
 					<div className="col-md-10 offset-md-2">
-						<h1>Overview</h1>
+						{this.props.children}
 					</div>
 				</div>
 			</div>
