@@ -26,6 +26,11 @@ $navigation-color: $white;
       }
     }
   }
+  @media (max-width: 768px) {
+    position: static;
+    height: auto;
+    text-align: center;
+  }
 }
 
 .container {
