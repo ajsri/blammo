@@ -13,7 +13,6 @@ class MainApp extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.children);
 	}
 
 	render() {

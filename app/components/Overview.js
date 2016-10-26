@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 
 class OverviewComponent extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
+	}
+	componentDidMount() {
+		this.props.getAllFirearms()
 	}
 	render() {
 		return (
