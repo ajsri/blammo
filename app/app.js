@@ -26,7 +26,10 @@ ReactDOM.render(<Provider store={store}>
     <Router history={hashHistory}>
         <Route path="/" component={MainApp}>
             <IndexRoute component={Overview}/>
-            <Route path="/weapons" component={Weapons} />
+            <Route path="/weapons">
+                <IndexRoute component={Weapons} />
+                <Route path="/weapons/:id" component={Ammunition}/>
+            </Route>
             <Route path="/ammo" component={Ammunition} />
         </Route>
     </Router>

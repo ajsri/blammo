@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class Navigation extends Component {
 	constructor(props){
@@ -20,9 +21,9 @@ class Navigation extends Component {
 			<div className="col-md-2 left-navigation">
 				<ul>
 					<li className="hidden-md-up">Overview</li>
-					<li>Ammo</li>
+					<li><Link to="/ammo">Ammo</Link></li>
 					<li>Documents</li>
-					<li>Firearms</li>
+					<li><Link to="/weapons">Firearms</Link></li>
 					<li>Other</li>
 					<li>Account</li>
 				</ul>
