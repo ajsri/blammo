@@ -30,12 +30,13 @@ app.use(express.static("public"));
 
 var env = 'dev';
 
+console.log(process.env.dbPass.substr(1))
 
 function db() {
     return mysql.createConnection({
         host: config.env[env].mysql.host,
-        user: config.env[env].mysql.user,
-        password: config.env[env].mysql.password,
+        user: 'fourseven',
+        password: process.env['dbPass'].substr(1),
         database: '47_ammo'
     });
 }
