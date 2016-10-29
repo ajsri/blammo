@@ -14,6 +14,8 @@ import mainReducer from './reducers/index'
 
 import MainApp from './components/Main'
 import Overview from './containers/Overview'
+import Weapons from './containers/Weapons'
+import Ammunition from './containers/Ammunition'
 
 import "./styles/blammo.scss"
 
@@ -24,6 +26,8 @@ ReactDOM.render(<Provider store={store}>
     <Router history={hashHistory}>
         <Route path="/" component={MainApp}>
             <IndexRoute component={Overview}/>
+            <Route path="/weapons" component={Weapons} />
+            <Route path="/ammo" component={Ammunition} />
         </Route>
     </Router>
 </Provider>, document.getElementById("blammo"));

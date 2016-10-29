@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
-import OverviewComponent from '../components/Overview'
+import WeaponsComponent from '../components/Weapons'
+
 import { getAllFirearms } from '../actions/index'
+
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -8,14 +10,14 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(getAllFirearms())
 		}
 	}
-};
+}
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		overview: state.overview
+		weapons: state.weapons
 	}
-};
+}
 
-const Overview = connect(mapStateToProps, mapDispatchToProps)(OverviewComponent);
+const Weapons = connect(mapStateToProps, mapDispatchToProps)(WeaponsComponent)
 
-export default Overview;
+export default Weapons
