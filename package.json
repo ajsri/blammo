@@ -4,6 +4,7 @@
   "description": "ammo inventory backend",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-hot": "webpack-dev-server --progress --inline --hot",
     "e6": "nodemon server.js --exec babel-node --presets es2015,stage-2"
@@ -24,9 +25,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "webpack": "^1.13.2",
-    "webpack-dev-middleware": "^1.8.4",
-    "webpack-dev-server": "^1.16.2",
-    "webpack-hot-middleware": "^2.13.1"
+    "webpack-dev-server": "^1.16.2"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
