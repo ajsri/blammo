@@ -1,8 +1,9 @@
+process.env.NODE_ENV = 'production';
 
 module.exports = {
 	entry: __dirname + '/app/app.js',
 	output: {
-		path: __dirname + "/public",
+		path: __dirname + "../blammo-api/public",
 		filename: 'build.js'
 	},
 	module: {

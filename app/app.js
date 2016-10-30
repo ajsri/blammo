@@ -6,7 +6,7 @@ import { Provider } from "react-redux"
 
 import thunk from "redux-thunk"
 import promise from "redux-promise"
-//import createLogger from "redux-logger"
+import createLogger from "redux-logger"
 
 import { Router, Route, hashHistory, Link, IndexRoute } from "react-router"
 
@@ -19,8 +19,8 @@ import Ammunition from './containers/Ammunition'
 
 import "./styles/blammo.scss"
 
-//const logger = createLogger();
-const store = createStore(mainReducer, applyMiddleware(thunk, promise));//, logger));
+const logger = createLogger();
+const store = createStore(mainReducer, applyMiddleware(thunk, promise, logger));
 
 ReactDOM.render(<Provider store={store}>
     <Router history={hashHistory}>
